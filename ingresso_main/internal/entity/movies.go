@@ -1,4 +1,4 @@
-package domain
+package entity
 
 import (
 	"errors"
@@ -30,6 +30,7 @@ const (
 )
 
 type Movie struct {
+	ID             string
 	Title          string `valid:"alphanum"`
 	ReleaseYear    uint
 	Minutes        uint
@@ -38,9 +39,9 @@ type Movie struct {
 	AvailableTimes []*AvailableTime
 }
 
-func NewMovie(title string, releaseYear uint, minutes uint, genre MovieGender, synopsis string) (*Movie, error) {
+func NewMovie(id string, title string, releaseYear uint, minutes uint, genre MovieGender, synopsis string) (*Movie, error) {
 
-	movie := &Movie{Title: title, ReleaseYear: releaseYear, Minutes: minutes, Genre: genre, Synopsis: synopsis}
+	movie := &Movie{ID: id, Title: title, ReleaseYear: releaseYear, Minutes: minutes, Genre: genre, Synopsis: synopsis}
 
 	err := movie.valid()
 	if err != nil {

@@ -1,4 +1,4 @@
-package domain
+package entity
 
 import (
 	"errors"
@@ -21,16 +21,16 @@ const (
 )
 
 type Room struct {
-	Identifier     string
+	ID             string
 	Capacity       uint
 	Type           RoomType
 	AvailableTimes []*AvailableTime
 	Chairs         map[string]map[string]Chair
 }
 
-func NewRoom(identifier string, capacity uint, roomType RoomType) (*Room, error) {
+func NewRoom(id string, capacity uint, roomType RoomType) (*Room, error) {
 
-	room := &Room{Identifier: identifier, Capacity: capacity, Type: roomType}
+	room := &Room{ID: id, Capacity: capacity, Type: roomType}
 
 	err := room.valid()
 	if err != nil {
@@ -40,10 +40,6 @@ func NewRoom(identifier string, capacity uint, roomType RoomType) (*Room, error)
 }
 
 func (r *Room) ReserveChair(row string, column string) error {
-	if !r.IsChairAvailable(row, column) {
-		return errors.New("chair is not available")
-	}
-
 	err := r.valid()
 	if err != nil {
 		return err
@@ -51,9 +47,14 @@ func (r *Room) ReserveChair(row string, column string) error {
 
 	if val, ok := r.Chairs[row]; ok {
 		if val, ok := val[column]; ok {
-			val.Available = false
+			if val.Available {
+				val.Available = false
+			} else {
+				return errors.New("chair is not available")
+			}
 		}
 	}
+
 	return nil
 }
 
