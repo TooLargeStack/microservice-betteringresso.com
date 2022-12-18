@@ -30,13 +30,12 @@ const (
 )
 
 type Movie struct {
-	ID             string
-	Title          string `valid:"alphanum"`
-	ReleaseYear    uint
-	Minutes        uint
-	Genre          MovieGender
-	Synopsis       string `valid:"alphanum"`
-	AvailableTimes []*AvailableTime
+	ID          string      `valid:"uuidv4"`
+	Title       string      `valid:"-"`
+	ReleaseYear uint        `valid:"-"`
+	Minutes     uint        `valid:"-"`
+	Genre       MovieGender `valid:"-"`
+	Synopsis    string      `valid:"-"`
 }
 
 func NewMovie(id string, title string, releaseYear uint, minutes uint, genre MovieGender, synopsis string) (*Movie, error) {
