@@ -12,7 +12,7 @@ func init() {
 }
 
 type RoomType string
-type ChairType string
+type SeatType string
 
 const (
 	DEFAULT_ROOM RoomType = "DEFAULT_ROOM"
@@ -22,28 +22,28 @@ const (
 	OTHER_ROOM   RoomType = "OTHER_ROOM"
 )
 const (
-	DEFAULT_CHAIR    ChairType = "DEFAULT_CHAIR"
-	SOFT_CHAIR       ChairType = "SOFT_CHAIR"
-	ACCESSIBLE_CHAIR ChairType = "ACCESSIBLE_CHAIR"
-	OTHER_CHAIR      ChairType = "OTHER_CHAIR"
+	DEFAULT_CHAIR    SeatType = "DEFAULT_CHAIR"
+	SOFT_CHAIR       SeatType = "SOFT_CHAIR"
+	ACCESSIBLE_CHAIR SeatType = "ACCESSIBLE_CHAIR"
+	OTHER_CHAIR      SeatType = "OTHER_CHAIR"
 )
 
-type Chair struct {
-	Identifier ChairType
+type Seat struct {
+	Identifier SeatType
 	Available  bool
 }
 
 type Room struct {
-	ID       string                       `valid:"uuidv4"`
-	Capacity uint                         `valid:"-"`
-	Type     RoomType                     `valid:"-"`
-	Chairs   map[string]map[string]*Chair `valid:"-"`
-	Movies   []*Movie                     `valid:"-"`
+	ID       string                      `valid:"uuidv4"`
+	Capacity uint                        `valid:"-"`
+	Type     RoomType                    `valid:"-"`
+	Seats    map[string]map[string]*Seat `valid:"-"`
+	Movies   []*Movie                    `valid:"-"`
 }
 
-func NewRoom(id string, capacity uint, roomType RoomType, chairs map[string]map[string]*Chair, movies []*Movie) (*Room, error) {
+func NewRoom(id string, capacity uint, roomType RoomType, chairs map[string]map[string]*Seat, movies []*Movie) (*Room, error) {
 
-	room := &Room{ID: id, Capacity: capacity, Type: roomType, Chairs: chairs, Movies: movies}
+	room := &Room{ID: id, Capacity: capacity, Type: roomType, Seats: chairs, Movies: movies}
 
 	err := room.valid()
 	if err != nil {
@@ -58,7 +58,7 @@ func (r *Room) ReserveChair(row string, column string) error {
 		return err
 	}
 
-	if val, ok := r.Chairs[row]; ok {
+	if val, ok := r.Seats[row]; ok {
 		if val, ok := val[column]; ok {
 			if val.Available {
 				val.Available = false
@@ -72,7 +72,7 @@ func (r *Room) ReserveChair(row string, column string) error {
 }
 
 func (r *Room) IsChairAvailable(row string, column string) bool {
-	if val, ok := r.Chairs[row]; ok {
+	if val, ok := r.Seats[row]; ok {
 		if val, ok := val[column]; ok {
 			return val.Available
 		}

@@ -8,8 +8,9 @@ import (
 )
 
 func Test_CreatingANewRoomSuccessfully(t *testing.T) {
+	// Arrange
 	id := uuid.New().String()
-	chairs := map[string]map[string]*Chair{
+	seats := map[string]map[string]*Seat{
 		"1": {
 			"A": {
 				Available: true,
@@ -46,18 +47,22 @@ func Test_CreatingANewRoomSuccessfully(t *testing.T) {
 		},
 	}
 
-	room, err := NewRoom(id, 100, DEFAULT_ROOM, chairs, movies)
+	// Act
+	room, err := NewRoom(id, 100, DEFAULT_ROOM, seats, movies)
+
+	// Assert
 	require.Nil(t, err)
 	require.Equal(t, id, room.ID)
 	require.Equal(t, uint(100), room.Capacity)
 	require.Equal(t, DEFAULT_ROOM, room.Type)
-	require.Equal(t, chairs, room.Chairs)
+	require.Equal(t, seats, room.Seats)
 	require.Equal(t, movies, room.Movies)
 }
 
 func Test_CreatingANewRoomWithInvalidID(t *testing.T) {
+	// Arrange
 	id := "1"
-	chairs := map[string]map[string]*Chair{
+	seats := map[string]map[string]*Seat{
 		"1": {
 			"A": {
 				Available: true,
@@ -94,15 +99,19 @@ func Test_CreatingANewRoomWithInvalidID(t *testing.T) {
 		},
 	}
 
-	room, err := NewRoom(id, 100, DEFAULT_ROOM, chairs, movies)
+	// Act
+	room, err := NewRoom(id, 100, DEFAULT_ROOM, seats, movies)
+
+	// Assert
 	require.NotNil(t, err)
 	require.Nil(t, room)
 	require.Equal(t, "invalid room data provided", err.Error())
 }
 
 func Test_CreatingANewRoomWithNotEnoughCapacity(t *testing.T) {
+	// Arrange
 	id := uuid.New().String()
-	chairs := map[string]map[string]*Chair{
+	seats := map[string]map[string]*Seat{
 		"1": {
 			"A": {
 				Available: false,
@@ -139,7 +148,10 @@ func Test_CreatingANewRoomWithNotEnoughCapacity(t *testing.T) {
 		},
 	}
 
-	room, err := NewRoom(id, 100, DEFAULT_ROOM, chairs, movies)
+	// Act
+	room, err := NewRoom(id, 100, DEFAULT_ROOM, seats, movies)
+
+	// Assert
 	require.NotNil(t, room)
 	require.Nil(t, err)
 
@@ -149,8 +161,9 @@ func Test_CreatingANewRoomWithNotEnoughCapacity(t *testing.T) {
 }
 
 func Test_IsChairAvailable(t *testing.T) {
+	// Arrange
 	id := uuid.New().String()
-	chairs := map[string]map[string]*Chair{
+	seats := map[string]map[string]*Seat{
 		"1": {
 			"A": {
 				Available: true,
@@ -187,7 +200,10 @@ func Test_IsChairAvailable(t *testing.T) {
 		},
 	}
 
-	room, err := NewRoom(id, 100, DEFAULT_ROOM, chairs, movies)
+	// Act
+	room, err := NewRoom(id, 100, DEFAULT_ROOM, seats, movies)
+
+	// Assert
 	require.NotNil(t, room)
 	require.Nil(t, err)
 

@@ -16,7 +16,7 @@ migrate_down:
 FILES := $(shell docker ps -aq)
 
 docker_reset_db:
-	rm -rf ./docker/postgres-data
+	@Remove-Item -Recurse -Force $(PWD)\docker\postgres-data
 
 docker_stop:
 	docker stop $(FILES)
