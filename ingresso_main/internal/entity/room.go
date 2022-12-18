@@ -45,11 +45,12 @@ type Room struct {
 	Type           RoomType                     `valid:"-"`
 	AvailableTimes []*AvailableTime             `valid:"-"`
 	Chairs         map[string]map[string]*Chair `valid:"-"`
+	Movies         []*Movie                     `valid:"-"`
 }
 
-func NewRoom(id string, capacity uint, roomType RoomType, availableTimes []*AvailableTime, chairs map[string]map[string]*Chair) (*Room, error) {
+func NewRoom(id string, capacity uint, roomType RoomType, availableTimes []*AvailableTime, chairs map[string]map[string]*Chair, movies []*Movie) (*Room, error) {
 
-	room := &Room{ID: id, Capacity: capacity, Type: roomType, AvailableTimes: availableTimes, Chairs: chairs}
+	room := &Room{ID: id, Capacity: capacity, Type: roomType, AvailableTimes: availableTimes, Chairs: chairs, Movies: movies}
 
 	err := room.valid()
 	if err != nil {

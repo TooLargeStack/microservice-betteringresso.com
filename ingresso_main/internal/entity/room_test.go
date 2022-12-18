@@ -38,12 +38,33 @@ func Test_CreatingANewRoomSuccessfully(t *testing.T) {
 			},
 		},
 	}
+	movies := []*Movie{
+		{
+			ID:          uuid.New().String(),
+			Title:       "The Shawshank Redemption",
+			ReleaseYear: 1994,
+			Minutes:     142,
+			Genre:       "Drama",
+			Synopsis:    "Two imprisoned",
+		},
+		{
+			ID:          uuid.New().String(),
+			Title:       "The Godfather",
+			ReleaseYear: 1972,
+			Minutes:     175,
+			Genre:       "Crime",
+			Synopsis:    "The aging patriarch of an organized crime dynasty transfers control of his clandestine empire to his reluctant son.",
+		},
+	}
 
-	room, err := NewRoom(id, 100, DEFAULT_ROOM, availableTimes, chairs)
+	room, err := NewRoom(id, 100, DEFAULT_ROOM, availableTimes, chairs, movies)
 	require.Nil(t, err)
 	require.Equal(t, id, room.ID)
 	require.Equal(t, uint(100), room.Capacity)
 	require.Equal(t, DEFAULT_ROOM, room.Type)
+	require.Equal(t, availableTimes, room.AvailableTimes)
+	require.Equal(t, chairs, room.Chairs)
+	require.Equal(t, movies, room.Movies)
 }
 
 func Test_CreatingANewRoomWithInvalidID(t *testing.T) {
@@ -76,8 +97,26 @@ func Test_CreatingANewRoomWithInvalidID(t *testing.T) {
 			},
 		},
 	}
+	movies := []*Movie{
+		{
+			ID:          uuid.New().String(),
+			Title:       "The Shawshank Redemption",
+			ReleaseYear: 1994,
+			Minutes:     142,
+			Genre:       "Drama",
+			Synopsis:    "Two imprisoned",
+		},
+		{
+			ID:          uuid.New().String(),
+			Title:       "The Godfather",
+			ReleaseYear: 1972,
+			Minutes:     175,
+			Genre:       "Crime",
+			Synopsis:    "The aging patriarch of an organized crime dynasty transfers control of his clandestine empire to his reluctant son.",
+		},
+	}
 
-	room, err := NewRoom(id, 100, DEFAULT_ROOM, availableTimes, chairs)
+	room, err := NewRoom(id, 100, DEFAULT_ROOM, availableTimes, chairs, movies)
 	require.NotNil(t, err)
 	require.Nil(t, room)
 	require.Equal(t, "invalid room data provided", err.Error())
@@ -113,8 +152,26 @@ func Test_CreatingANewRoomWithNotEnoughCapacity(t *testing.T) {
 			},
 		},
 	}
+	movies := []*Movie{
+		{
+			ID:          uuid.New().String(),
+			Title:       "The Shawshank Redemption",
+			ReleaseYear: 1994,
+			Minutes:     142,
+			Genre:       "Drama",
+			Synopsis:    "Two imprisoned",
+		},
+		{
+			ID:          uuid.New().String(),
+			Title:       "The Godfather",
+			ReleaseYear: 1972,
+			Minutes:     175,
+			Genre:       "Crime",
+			Synopsis:    "The aging patriarch of an organized crime dynasty transfers control of his clandestine empire to his reluctant son.",
+		},
+	}
 
-	room, err := NewRoom(id, 100, DEFAULT_ROOM, availableTimes, chairs)
+	room, err := NewRoom(id, 100, DEFAULT_ROOM, availableTimes, chairs, movies)
 	require.NotNil(t, room)
 	require.Nil(t, err)
 
@@ -153,8 +210,26 @@ func Test_IsChairAvailable(t *testing.T) {
 			},
 		},
 	}
+	movies := []*Movie{
+		{
+			ID:          uuid.New().String(),
+			Title:       "The Shawshank Redemption",
+			ReleaseYear: 1994,
+			Minutes:     142,
+			Genre:       "Drama",
+			Synopsis:    "Two imprisoned",
+		},
+		{
+			ID:          uuid.New().String(),
+			Title:       "The Godfather",
+			ReleaseYear: 1972,
+			Minutes:     175,
+			Genre:       "Crime",
+			Synopsis:    "The aging patriarch of an organized crime dynasty transfers control of his clandestine empire to his reluctant son.",
+		},
+	}
 
-	room, err := NewRoom(id, 100, DEFAULT_ROOM, availableTimes, chairs)
+	room, err := NewRoom(id, 100, DEFAULT_ROOM, availableTimes, chairs, movies)
 	require.NotNil(t, room)
 	require.Nil(t, err)
 
