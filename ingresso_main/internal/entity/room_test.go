@@ -2,7 +2,6 @@ package entity
 
 import (
 	"testing"
-	"time"
 
 	"github.com/google/uuid"
 	"github.com/stretchr/testify/require"
@@ -10,16 +9,6 @@ import (
 
 func Test_CreatingANewRoomSuccessfully(t *testing.T) {
 	id := uuid.New().String()
-	availableTimes := []*AvailableTime{
-		{
-			StartTime: time.Now(),
-			EndTime:   time.Now().Add(time.Hour),
-		},
-		{
-			StartTime: time.Now().Add(time.Hour),
-			EndTime:   time.Now().Add(time.Hour * 2),
-		},
-	}
 	chairs := map[string]map[string]*Chair{
 		"1": {
 			"A": {
@@ -57,28 +46,17 @@ func Test_CreatingANewRoomSuccessfully(t *testing.T) {
 		},
 	}
 
-	room, err := NewRoom(id, 100, DEFAULT_ROOM, availableTimes, chairs, movies)
+	room, err := NewRoom(id, 100, DEFAULT_ROOM, chairs, movies)
 	require.Nil(t, err)
 	require.Equal(t, id, room.ID)
 	require.Equal(t, uint(100), room.Capacity)
 	require.Equal(t, DEFAULT_ROOM, room.Type)
-	require.Equal(t, availableTimes, room.AvailableTimes)
 	require.Equal(t, chairs, room.Chairs)
 	require.Equal(t, movies, room.Movies)
 }
 
 func Test_CreatingANewRoomWithInvalidID(t *testing.T) {
 	id := "1"
-	availableTimes := []*AvailableTime{
-		{
-			StartTime: time.Now(),
-			EndTime:   time.Now().Add(time.Hour),
-		},
-		{
-			StartTime: time.Now().Add(time.Hour),
-			EndTime:   time.Now().Add(time.Hour * 2),
-		},
-	}
 	chairs := map[string]map[string]*Chair{
 		"1": {
 			"A": {
@@ -116,7 +94,7 @@ func Test_CreatingANewRoomWithInvalidID(t *testing.T) {
 		},
 	}
 
-	room, err := NewRoom(id, 100, DEFAULT_ROOM, availableTimes, chairs, movies)
+	room, err := NewRoom(id, 100, DEFAULT_ROOM, chairs, movies)
 	require.NotNil(t, err)
 	require.Nil(t, room)
 	require.Equal(t, "invalid room data provided", err.Error())
@@ -124,16 +102,6 @@ func Test_CreatingANewRoomWithInvalidID(t *testing.T) {
 
 func Test_CreatingANewRoomWithNotEnoughCapacity(t *testing.T) {
 	id := uuid.New().String()
-	availableTimes := []*AvailableTime{
-		{
-			StartTime: time.Now(),
-			EndTime:   time.Now().Add(time.Hour),
-		},
-		{
-			StartTime: time.Now().Add(time.Hour),
-			EndTime:   time.Now().Add(time.Hour * 2),
-		},
-	}
 	chairs := map[string]map[string]*Chair{
 		"1": {
 			"A": {
@@ -171,7 +139,7 @@ func Test_CreatingANewRoomWithNotEnoughCapacity(t *testing.T) {
 		},
 	}
 
-	room, err := NewRoom(id, 100, DEFAULT_ROOM, availableTimes, chairs, movies)
+	room, err := NewRoom(id, 100, DEFAULT_ROOM, chairs, movies)
 	require.NotNil(t, room)
 	require.Nil(t, err)
 
@@ -182,16 +150,6 @@ func Test_CreatingANewRoomWithNotEnoughCapacity(t *testing.T) {
 
 func Test_IsChairAvailable(t *testing.T) {
 	id := uuid.New().String()
-	availableTimes := []*AvailableTime{
-		{
-			StartTime: time.Now(),
-			EndTime:   time.Now().Add(time.Hour),
-		},
-		{
-			StartTime: time.Now().Add(time.Hour),
-			EndTime:   time.Now().Add(time.Hour * 2),
-		},
-	}
 	chairs := map[string]map[string]*Chair{
 		"1": {
 			"A": {
@@ -229,7 +187,7 @@ func Test_IsChairAvailable(t *testing.T) {
 		},
 	}
 
-	room, err := NewRoom(id, 100, DEFAULT_ROOM, availableTimes, chairs, movies)
+	room, err := NewRoom(id, 100, DEFAULT_ROOM, chairs, movies)
 	require.NotNil(t, room)
 	require.Nil(t, err)
 

@@ -27,6 +27,10 @@ const (
 	MUSICAL   MovieGender = "MUSICAL"
 	MYSTERY   MovieGender = "MYSTERY"
 	ROMANCE   MovieGender = "ROMANCE"
+	SCIFI     MovieGender = "SCIFI"
+	THRILLER  MovieGender = "THRILLER"
+	WAR       MovieGender = "WAR"
+	WESTERN   MovieGender = "WESTERN"
 )
 
 type Movie struct {

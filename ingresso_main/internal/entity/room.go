@@ -3,7 +3,6 @@ package entity
 import (
 	"errors"
 	"fmt"
-	"time"
 
 	"github.com/asaskevich/govalidator"
 )
@@ -34,23 +33,17 @@ type Chair struct {
 	Available  bool
 }
 
-type AvailableTime struct {
-	StartTime time.Time `valid:"-"`
-	EndTime   time.Time `valid:"-"`
-}
-
 type Room struct {
-	ID             string                       `valid:"uuidv4"`
-	Capacity       uint                         `valid:"-"`
-	Type           RoomType                     `valid:"-"`
-	AvailableTimes []*AvailableTime             `valid:"-"`
-	Chairs         map[string]map[string]*Chair `valid:"-"`
-	Movies         []*Movie                     `valid:"-"`
+	ID       string                       `valid:"uuidv4"`
+	Capacity uint                         `valid:"-"`
+	Type     RoomType                     `valid:"-"`
+	Chairs   map[string]map[string]*Chair `valid:"-"`
+	Movies   []*Movie                     `valid:"-"`
 }
 
-func NewRoom(id string, capacity uint, roomType RoomType, availableTimes []*AvailableTime, chairs map[string]map[string]*Chair, movies []*Movie) (*Room, error) {
+func NewRoom(id string, capacity uint, roomType RoomType, chairs map[string]map[string]*Chair, movies []*Movie) (*Room, error) {
 
-	room := &Room{ID: id, Capacity: capacity, Type: roomType, AvailableTimes: availableTimes, Chairs: chairs, Movies: movies}
+	room := &Room{ID: id, Capacity: capacity, Type: roomType, Chairs: chairs, Movies: movies}
 
 	err := room.valid()
 	if err != nil {
