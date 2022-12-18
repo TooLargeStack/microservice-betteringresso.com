@@ -1,0 +1,32 @@
+version: '3'
+
+services:
+  postgres-rooms-db:
+    image: postgres:14.3-alpine
+    container_name: ingresso-postgres-room-db
+    restart: always
+    ports:
+      - '5432:5432'
+    environment:
+      - POSTGRES_USERNAME=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=rooms
+    networks:
+      - ingresso-main-network
+
+  postgres-movies-db:
+    image: postgres:14.3-alpine
+    container_name: ingresso-postgres-movie-db
+    restart: always
+    ports:
+      - '5433:5432'
+    environment:
+      - POSTGRES_USERNAME=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=movies
+    networks:
+      - ingresso-main-network
+
+networks:
+  ingresso-main-network:
+    driver: bridge

@@ -3,6 +3,7 @@ package entity
 import (
 	"errors"
 	"fmt"
+	"time"
 
 	"github.com/asaskevich/govalidator"
 )
@@ -12,6 +13,7 @@ func init() {
 }
 
 type RoomType string
+type ChairType string
 
 const (
 	DEFAULT_ROOM RoomType = "DEFAULT_ROOM"
@@ -20,6 +22,22 @@ const (
 	IMAX_ROOM    RoomType = "IMAX_ROOM"
 	OTHER_ROOM   RoomType = "OTHER_ROOM"
 )
+const (
+	DEFAULT_CHAIR    ChairType = "DEFAULT_CHAIR"
+	SOFT_CHAIR       ChairType = "SOFT_CHAIR"
+	ACCESSIBLE_CHAIR ChairType = "ACCESSIBLE_CHAIR"
+	OTHER_CHAIR      ChairType = "OTHER_CHAIR"
+)
+
+type Chair struct {
+	Identifier ChairType
+	Available  bool
+}
+
+type AvailableTime struct {
+	StartTime time.Time `valid:"-"`
+	EndTime   time.Time `valid:"-"`
+}
 
 type Room struct {
 	ID             string                       `valid:"uuidv4"`
