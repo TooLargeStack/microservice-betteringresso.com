@@ -12,6 +12,11 @@ migrate_down:
 	migrate -path migrations -database "postgresql://postgres:postgres@localhost:5432/ingresso_main?sslmode=disable" down 1
 
 # ==============================================================================
+# Go sqlc
+sqlc_generate:
+	docker run --rm -v $(pwd):/src -w /src kjconroy/sqlc generate
+
+# ==============================================================================
 # Docker commands
 FILES := $(shell docker ps -aq)
 
