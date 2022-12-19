@@ -1,8 +1,8 @@
-ALTER TABLE movies DROP CONSTRAINT IF EXISTS movies_genre_idx;
-ALTER TABLE movies DROP CONSTRAINT IF EXISTS movies_minutes_idx;
-ALTER TABLE movies DROP CONSTRAINT IF EXISTS movies_released_year_idx;
-ALTER TABLE movies DROP CONSTRAINT IF EXISTS movies_title_idx;
-ALTER TABLE movies DROP CONSTRAINT IF EXISTS movies_pkey;
+ALTER TABLE movies DROP CONSTRAINT IF EXISTS idx_movies_genre;
+ALTER TABLE movies DROP CONSTRAINT IF EXISTS idx_movies_minutes;
+ALTER TABLE movies DROP CONSTRAINT IF EXISTS idx_movies_released_year;
+ALTER TABLE movies DROP CONSTRAINT IF EXISTS idx_movies_title;
+ALTER TABLE movies DROP CONSTRAINT IF EXISTS pk_movies;
 
 DROP TABLE IF EXISTS movies;
 

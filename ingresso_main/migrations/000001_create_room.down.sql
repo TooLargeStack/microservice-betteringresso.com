@@ -1,6 +1,6 @@
-ALTER TABLE rooms DROP CONSTRAINT rooms_type_idx;
-ALTER TABLE rooms DROP CONSTRAINT rooms_capacity_idx;
-ALTER TABLE rooms DROP CONSTRAINT rooms_pkey;
+ALTER TABLE rooms DROP CONSTRAINT idx_rooms_type;
+ALTER TABLE rooms DROP CONSTRAINT idx_rooms_capacity;
+ALTER TABLE rooms DROP CONSTRAINT pk_rooms;
 
 DROP TABLE IF EXISTS rooms;
 

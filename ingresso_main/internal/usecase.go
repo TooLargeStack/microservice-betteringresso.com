@@ -1,6 +1,11 @@
 package internal
 
-import "time"
+import (
+	"context"
+	"time"
+
+	"github.com/google/uuid"
+)
 
 type SeatInput struct {
 	Row    string `json:"row"`
@@ -8,8 +13,8 @@ type SeatInput struct {
 }
 
 type ReserveSeatInput struct {
-	MovieID   string
-	RoomID    string
+	MovieID   uuid.UUID
+	RoomID    uuid.UUID
 	StartTime time.Time
 	Seat      SeatInput
 }
@@ -19,5 +24,5 @@ type ReserveSeatOutput struct {
 }
 
 type UseCase interface {
-	ReserveSeat(input ReserveSeatInput) (ReserveSeatOutput, error)
+	ReserveSeat(ctx context.Context, input ReserveSeatInput) (ReserveSeatOutput, error)
 }

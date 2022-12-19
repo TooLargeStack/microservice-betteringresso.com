@@ -1,15 +1,16 @@
-ALTER TABLE IF EXISTS movie_sessions DROP CONSTRAINT IF EXISTS "movie_sessions_cine_id_movie_id_start_time_idx";
-ALTER TABLE IF EXISTS movie_sessions DROP CONSTRAINT IF EXISTS "movie_sessions_cine_id_movie_id_room_id_idx";
-ALTER TABLE IF EXISTS movie_sessions DROP CONSTRAINT IF EXISTS "movie_sessions_cine_id_movie_id_idx";
-ALTER TABLE IF EXISTS movie_sessions DROP CONSTRAINT IF EXISTS "movie_sessions_start_at_idx";
-ALTER TABLE IF EXISTS movie_sessions DROP CONSTRAINT IF EXISTS "movie_sessions_room_id_idx";
-ALTER TABLE IF EXISTS movie_sessions DROP CONSTRAINT IF EXISTS "movie_sessions_movie_id_idx";
-ALTER TABLE IF EXISTS movie_sessions DROP CONSTRAINT IF EXISTS "movie_sessions_cine_id_idx";
+ALTER TABLE IF EXISTS movie_sessions DROP CONSTRAINT IF EXISTS "idx_movie_sessions_movie_id_start_time_reserved_seats";
+ALTER TABLE IF EXISTS movie_sessions DROP CONSTRAINT IF EXISTS "idx_movie_sessions_cine_id_movie_id_start_time";
+ALTER TABLE IF EXISTS movie_sessions DROP CONSTRAINT IF EXISTS "idx_movie_sessions_cine_id_movie_id_room_id";
+ALTER TABLE IF EXISTS movie_sessions DROP CONSTRAINT IF EXISTS "idx_movie_sessions_cine_id_movie_id";
+ALTER TABLE IF EXISTS movie_sessions DROP CONSTRAINT IF EXISTS "idx_movie_sessions_start_at";
+ALTER TABLE IF EXISTS movie_sessions DROP CONSTRAINT IF EXISTS "idx_movie_sessions_room_id";
+ALTER TABLE IF EXISTS movie_sessions DROP CONSTRAINT IF EXISTS "idx_movie_sessions_movie_id";
+ALTER TABLE IF EXISTS movie_sessions DROP CONSTRAINT IF EXISTS "idx_movie_sessions_cine_id";
 
-ALTER TABLE IF EXISTS movie_sessions DROP CONSTRAINT IF EXISTS "movie_sessions_room_id_fkey";
-ALTER TABLE IF EXISTS movie_sessions DROP CONSTRAINT IF EXISTS "movie_sessions_movie_id_fkey";
-ALTER TABLE IF EXISTS movie_sessions DROP CONSTRAINT IF EXISTS "movie_sessions_cine_id_fkey";
-ALTER TABLE IF EXISTS movie_sessions DROP CONSTRAINT IF EXISTS "movie_sessions_pkey";
+ALTER TABLE IF EXISTS movie_sessions DROP CONSTRAINT IF EXISTS "fk_movie_sessions_room_id";
+ALTER TABLE IF EXISTS movie_sessions DROP CONSTRAINT IF EXISTS "fk_movie_sessions_movie_id";
+ALTER TABLE IF EXISTS movie_sessions DROP CONSTRAINT IF EXISTS "fk_movie_sessions_cine_id";
+ALTER TABLE IF EXISTS movie_sessions DROP CONSTRAINT IF EXISTS "pk_movie_sessions";
 
 
 DROP TABLE IF EXISTS movie_sessions;

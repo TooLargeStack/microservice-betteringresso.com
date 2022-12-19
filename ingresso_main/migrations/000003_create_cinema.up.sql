@@ -12,9 +12,9 @@ CREATE TABLE cines (
     updated_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT NOW()
 );
 
-ALTER TABLE cines ADD CONSTRAINT cine_pkey PRIMARY KEY (id);
+ALTER TABLE cines ADD CONSTRAINT pk_cine PRIMARY KEY (id);
 
-CREATE INDEX cines_name_idx ON cines (name);
+CREATE INDEX idx_cines_name ON cines (name);
 
 COMMENT ON TABLE cines IS 'Cines table';
 

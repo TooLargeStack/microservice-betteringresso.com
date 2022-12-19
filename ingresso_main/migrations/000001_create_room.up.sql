@@ -11,10 +11,10 @@ CREATE TABLE rooms (
     updated_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT NOW()
 );
 
-ALTER TABLE rooms ADD CONSTRAINT rooms_pkey PRIMARY KEY (id);
+ALTER TABLE rooms ADD CONSTRAINT pk_rooms PRIMARY KEY (id);
 
-CREATE INDEX rooms_capacity_idx ON rooms (capacity);
-CREATE INDEX rooms_type_idx ON rooms (type);
+CREATE INDEX idx_rooms_capacity ON rooms (capacity);
+CREATE INDEX idx_rooms_type ON rooms (type);
 
 COMMENT ON TABLE rooms IS 'The rooms in the cine';
 

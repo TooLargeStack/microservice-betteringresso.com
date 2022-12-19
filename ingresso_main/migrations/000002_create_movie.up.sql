@@ -12,12 +12,12 @@ CREATE TABLE movies (
     updated_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT NOW()
 );
 
-ALTER TABLE movies ADD CONSTRAINT movies_pkey PRIMARY KEY (id);
+ALTER TABLE movies ADD CONSTRAINT pk_movies PRIMARY KEY (id);
 
-CREATE INDEX movies_title_idx ON movies (title);
-CREATE INDEX movies_released_year_idx ON movies (released_year);
-CREATE INDEX movies_minutes_idx ON movies (minutes);
-CREATE INDEX movies_genre_idx ON movies (genre);
+CREATE INDEX idx_movies_title ON movies (title);
+CREATE INDEX idx_movies_released_year ON movies (released_year);
+CREATE INDEX idx_movies_minutes ON movies (minutes);
+CREATE INDEX idx_movies_genre ON movies (genre);
 
 COMMENT ON TABLE movies IS 'Contains all the movies';
 
