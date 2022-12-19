@@ -1,8 +1,8 @@
 CREATE TABLE movie_sessions (
     id UUID DEFAULT uuid_generate_v4(),
-    cine_id INT NOT NULL,
-    room_id INT NOT NULL,
-    movie_id INT NOT NULL,
+    cine_id UUID NOT NULL,
+    room_id UUID NOT NULL,
+    movie_id UUID NOT NULL,
     start_time TIMESTAMP WITH TIME ZONE NOT NULL,
     end_time TIMESTAMP WITH TIME ZONE NOT NULL,
     created_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT NOW(),
@@ -17,7 +17,7 @@ ALTER TABLE movie_sessions ADD CONSTRAINT movie_sessions_room_id_fkey FOREIGN KE
 CREATE INDEX movie_sessions_cine_id_idx ON movie_sessions (cine_id);
 CREATE INDEX movie_sessions_movie_id_idx ON movie_sessions (movie_id);
 CREATE INDEX movie_sessions_room_id_idx ON movie_sessions (room_id);
-CREATE INDEX movie_sessions_start_at_idx ON movie_sessions (start_at);
+CREATE INDEX movie_sessions_start_time_idx ON movie_sessions (start_time);
 CREATE UNIQUE INDEX movie_sessions_cine_id_movie_id_idx ON movie_sessions (cine_id, movie_id);
 CREATE UNIQUE INDEX movie_sessions_cine_id_movie_id_room_id_idx ON movie_sessions (cine_id, movie_id, room_id);
 CREATE UNIQUE INDEX movie_sessions_cine_id_movie_id_start_time_idx ON movie_sessions (cine_id, movie_id, start_time);
