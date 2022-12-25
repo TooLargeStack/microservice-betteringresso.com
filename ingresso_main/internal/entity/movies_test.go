@@ -9,7 +9,7 @@ import (
 
 func Test_CreatingNewMovieSuccessfully(t *testing.T) {
 	// Arrange
-	var id = uuid.New().String()
+	var id = uuid.New()
 	var title = "The Shawshank Redemption"
 	var releaseYear uint = 1994
 	var minutes uint = 142
@@ -28,22 +28,4 @@ func Test_CreatingNewMovieSuccessfully(t *testing.T) {
 	require.Equal(t, minutes, movie.Minutes)
 	require.Equal(t, genre, movie.Genre)
 	require.Equal(t, synopsis, movie.Synopsis)
-}
-
-func Test_CreatingNewMovieWithInvalidIdentifier(t *testing.T) {
-	// Arrange
-	var id = "1"
-	var title = "The Shawshank Redemption"
-	var releaseYear uint = 1994
-	var minutes uint = 142
-	var genre = ACTION
-	var synopsis = "Two imprisoned"
-
-	// Act
-	movie, err := NewMovie(id, title, releaseYear, minutes, genre, synopsis)
-
-	// Assert
-	require.Nil(t, movie)
-	require.NotNil(t, err)
-	require.Equal(t, "invalid movie data provided", err.Error())
 }

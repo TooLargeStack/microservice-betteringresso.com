@@ -19,11 +19,10 @@ func NewReserveChairUsecase(querier repository.Querier) *ReserveChairUsecase {
 }
 
 func (r *ReserveChairUsecase) ReserveSeat(ctx context.Context, input internal.ReserveSeatInput) (internal.ReserveSeatOutput, error) {
-	room, err := r.querier.GetRoom(ctx, uuid.NullUUID{
+	_, err := r.querier.GetRoom(ctx, uuid.NullUUID{
 		UUID:  input.RoomID,
 		Valid: true,
 	})
-	// TODO: Create custom errors
 	if err != nil {
 		return internal.ReserveSeatOutput{}, err
 	}

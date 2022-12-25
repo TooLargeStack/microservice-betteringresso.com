@@ -4,6 +4,7 @@ import (
 	"errors"
 
 	"github.com/asaskevich/govalidator"
+	"github.com/google/uuid"
 )
 
 func init() {
@@ -34,7 +35,7 @@ const (
 )
 
 type Movie struct {
-	ID          string      `valid:"uuidv4"`
+	ID          uuid.UUID   `valid:"-"`
 	Title       string      `valid:"-"`
 	ReleaseYear uint        `valid:"-"`
 	Minutes     uint        `valid:"-"`
@@ -42,7 +43,7 @@ type Movie struct {
 	Synopsis    string      `valid:"-"`
 }
 
-func NewMovie(id string, title string, releaseYear uint, minutes uint, genre MovieGender, synopsis string) (*Movie, error) {
+func NewMovie(id uuid.UUID, title string, releaseYear uint, minutes uint, genre MovieGender, synopsis string) (*Movie, error) {
 
 	movie := &Movie{ID: id, Title: title, ReleaseYear: releaseYear, Minutes: minutes, Genre: genre, Synopsis: synopsis}
 

@@ -5,6 +5,7 @@ import (
 	"fmt"
 
 	"github.com/asaskevich/govalidator"
+	"github.com/google/uuid"
 )
 
 func init() {
@@ -34,14 +35,14 @@ type Seat struct {
 }
 
 type Room struct {
-	ID       string                      `valid:"uuidv4"`
+	ID       uuid.UUID                   `valid:"-"`
 	Capacity uint                        `valid:"-"`
 	Type     RoomType                    `valid:"-"`
 	Seats    map[string]map[string]*Seat `valid:"-"`
 	Movies   []*Movie                    `valid:"-"`
 }
 
-func NewRoom(id string, capacity uint, roomType RoomType, chairs map[string]map[string]*Seat, movies []*Movie) (*Room, error) {
+func NewRoom(id uuid.UUID, capacity uint, roomType RoomType, chairs map[string]map[string]*Seat, movies []*Movie) (*Room, error) {
 
 	room := &Room{ID: id, Capacity: capacity, Type: roomType, Seats: chairs, Movies: movies}
 
