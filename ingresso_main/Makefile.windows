@@ -1,0 +1,37 @@
+.PHONY: create_migration migrate_up migrate_down docker_reset_db docker_stop docker_run docker_clean docker_logs
+
+# ==============================================================================
+# Go migrate postgresql
+create_migration:
+	migrate create -ext sql -dir migrations -seq $(migration_filename)
+
+migrate_up:
+	migrate -path migrations -database "postgresql://postgres:postgres@localhost:5432/ingresso_main?sslmode=disable" up 1
+
+migrate_down:
+	migrate -path migrations -database "postgresql://postgres:postgres@localhost:5432/ingresso_main?sslmode=disable" down 1
+
+# ==============================================================================
+# Go sqlc
+sqlc_generate:
+	docker run --rm -v $(pwd):/src -w /src kjconroy/sqlc generate
+
+# ==============================================================================
+# Docker commands
+FILES := $(shell docker ps -aq)
+
+docker_reset_db:
+	@Remove-Item -Recurse -Force $(PWD)\docker\postgres-data
+
+docker_stop:
+	docker stop $(FILES)
+	docker rm $(FILES)
+
+docker_start:
+	docker compose up --build --force-recreate
+
+docker_clean:
+	docker system prune -f
+
+docker_logs:
+	docker logs -f $(FILES)
